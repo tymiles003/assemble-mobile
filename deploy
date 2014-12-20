@@ -1,0 +1,10 @@
+echo " "
+echo "  // Secure Cordova deployment tool"
+echo "     r.w. 2014"
+echo " "
+echo "  [ INFO ] Packaging files for deployment."
+zip -r0 cur.zip *
+scp ./cur.zip mint:cur.zip 
+ssh mint './buildassemble'
+echo ""
+echo "  [ INFO ] All task complete. Returning to local shell"

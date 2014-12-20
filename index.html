@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<!--
+    ASSEMBLE Mobile Client
+
+    v0.3.1
+    r.w. 2014
+
+-->
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Cordova related settings -->
+
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+
+
+<!-- Load MVC Resources -->
+<link rel="stylesheet" type="text/css" href="layout.css">
+
+<!-- JavaScript Libraries -->
+
+<script type="text/javascript" src="include/hammer.min.js"></script>
+<script type="text/javascript" src="include/fastclick.js"></script>
+<script type="text/javascript" src="include/socket.io-1.2.1.js"></script>
+<script type="text/javascript" src="include/zepto.min.js"></script>
+<script type="text/javascript" src="include/velocity.min.js"></script>
+
+
+
+
+<title>Assemble Beta</title>
+</head>
+<body style='-webkit-user-select: none; user-select:none;' unselectable='on'
+onselectstart='return false;'
+onmousedown='return false;'>
+
+<!--  Notification Strip  -->
+<div id="notification">Notification</div>
+
+
+<!--  Login View  -->
+<div id="loginBg">
+    <div id="loginVer">Version 0.3 beta</div>
+    <div id="loginLogo">
+        <div id="loginCircle" onclick="notify('i','Error: Server is offline')"></div>
+        <div id="loginTitle" onclick="toggleLoginUI()">Assemble<br/><div id="loginChineseTitle">愛國者之槍</div></div>
+    </div>
+    <hr id="loginAlignr"/>
+    <div id="loginWhich">
+        <div id="loginBtn" onclick="showWorld()">Facebook 登入</div>
+
+        <div id="loginLoading" >
+        載入中<br/>
+            <div id="loginLoader">
+                <div id="loginLoaderBlock"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--  World View   -->
+
+<div id="worldWindow" class="hideAll">
+    <!--  Banner Div  -->
+    <div id="worldBanner">
+        <div id="worldBannerButton" onclick="menuToggle()"></div>
+        <div id="worldBannerTitle">Assemble Beta</div>
+    </div>
+    <!--  Pages  -->
+    <div id="worldPages">
+        <div id="worldMap">Map</div>
+        <div id="worldOps">Ops</div>
+        <div id="worldCell">Cell</div>
+        <div id="worldIntels">Intels</div>
+        <div id="worldChat">Chat
+            <div></div>
+            <div id="worldChatBox"></div>
+            <input id="worldChatInput" type="text"/>
+        </div>
+    </div>
+    <!--  Footer Div  -->
+    <div id="worldFooter">
+        <div id="worldFooterSelection"></div>
+        <div id="worldFooterMap" onclick="pageToggle(0)"></div>
+        <div id="worldFooterOps" onclick="pageToggle(1)"></div>
+        <div id="worldFooterCell" onclick="pageToggle(2)"></div>
+        <div id="worldFooterIntels" onclick="pageToggle(3)"></div>
+        <div id="worldFooterChat" onclick="pageToggle(4)"></div>
+
+    </div>
+
+</div>
+    <div id="worldMenuDimmer" onclick="menuToggle()"></div>
+    <div id="worldMenu" onclick="menuToggle()">
+        <div id="worldMenuTitle">
+            <img id="worldMenuPlayerPic" src=""/>
+            <div id="worldMenuPlayerInfo">
+                <div id="worldMenuPlayerName"></div>
+                <div id="worldMenuPlayerDetail"> </div>
+            </div>
+        </div>
+
+        <div class="worldMenuItem" onclick="navigator.app.exitApp()">離開程式</div>
+    </div>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<!-- Not yet implemented
+<script type="text/javascript" src="socket.js"></script> -->
+</body>
+</html>

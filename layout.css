@@ -1,0 +1,449 @@
+
+
+
+body {
+    background: #283033;
+    color: #d4ccca;
+    font-family: "Roboto", "Helvetica Neue";
+    font-weight: 300;
+    font-size: 18px;
+
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background-image: -webkit-linear-gradient(left, rgba(240,240,240,0), rgba(240,240,240,0.3), rgba(240,240,240,0));
+}
+
+.hideAll {
+    display: none;
+}
+
+/*  Notification
+    Z: 2000
+  */
+#notification {
+    position: fixed;
+    z-index: 2000;
+    height: 24px;
+    width: 100%;
+    bottom: -24px; left: 0px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    -webkit-transition: 0.1s ease-in-out;
+
+}
+#notification.show {
+    -webkit-transform: translateY(-24px);
+}
+
+
+
+
+
+/*  Login Window
+    Z: 10
+  */
+#loginBg {
+
+    -webkit-transition: 0.3s cubic-bezier(.9,.03,.82,.41);
+}
+
+
+#loginCircle {
+    position:fixed;
+    top: 10%; left: 10%;
+    width: 80%; height: 38%;
+    background-image: url('assets/logo-large.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+
+
+    display: table-cell;
+
+    vertical-align: bottom;
+}
+#loginTitle{
+    position: fixed;
+    font-family: "Bebas Neue";
+    font-style: 200;
+    top: 48%; left: 0;
+    color: #d4ccca;
+    font-size: 36px;
+    width: 100%;
+    text-align: center;
+}
+#loginChineseTitle {
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+#loginAlignr {
+    position: fixed;
+    top: calc(50% + 56px); left: 10%;
+    width: 80%; height: 1.5px;
+}
+
+#loginVer {
+    position: fixed;
+    top: 3px; left: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    color: #727776;
+}
+
+#loginWhich {
+    position: fixed;
+    top: calc(51% + 40px); left: 10%;
+    width: 80%; height: 10%;
+    text-align: center;
+    font-weight: lighter;
+    padding-top: 8px;
+    font-size: 18px;
+    background: rgba(162,164,164,0.1);
+    box-shadow: inset 0 0 32px 5px rgba(43,44,45,0.4), 0 2px 10px 3px rgba(12,13,13,0.08);
+    -webkit-transition: 0.3s ease-in-out;
+    opacity: 0.0;
+}
+#loginWhich.show {
+    -webkit-transform: translateY(32px);
+    opacity: 1.0;
+}
+
+#loginBtn {
+    position:relative;
+
+    -webkit-transform: translateY(-12px);
+    -webkit-transition: 0.3s ease-in-out;
+    opacity: 0.0;
+
+}
+#loginBtn.show {
+    -webkit-transform: translateY(12px);
+    opacity: 1.0;
+
+}
+
+#loginLoading {
+
+    -webkit-transform: translateY(-24px);
+    -webkit-transition: 0.3s ease-in-out;
+    opacity: 0.0;
+
+}
+#loginLoading.show {
+    -webkit-transform: translateY(0px);
+    opacity: 1.0;
+
+}
+
+#loginLoader {
+    width: 60%;
+    height: 2px;
+    position:relative;
+    display: inline-block;
+    padding: 0;
+    background: rgba(124,124,126,0.3);
+}
+
+#loginLoaderBlock {
+    width: 20%; height: 2px;
+    background: #666;
+
+    /*
+    -webkit-animation: loader 0.8s infinite;
+    */
+
+}
+
+
+
+@-webkit-keyframes loader{
+    0% {
+        -webkit-transform: translateX(0px);
+    }
+    50% {
+        -webkit-transform: translateX(400%);
+    }
+    100% {
+        -webkit-transform: translateX(0px);
+    }
+}
+
+/*  World window
+    Z: 200
+  */
+#worldWindow {
+
+    position: fixed;
+    top: 0px; left: 0px;
+    width: 100%; height: 100%;
+    overflow: hidden;
+
+    background: #e9eaea;
+}
+
+/*  World - Banner  */
+
+#worldBanner {
+    position: fixed;
+    top: 0px; left: 0px;
+    width: 100%;
+    height: 48px;
+    background: #333;
+    box-shadow: inset 0 0 32px 4px rgba(21,22,23,0.45), 0 2px 6px 2px rgba(21,22,23,0.6);
+
+
+}
+#worldBannerButton {
+    position: fixed;
+    top: 4px; left: 6px;
+
+    width: 36px; height: 36px;
+    background-image: url(assets/menu.png);
+    background-size: 30px 30px;
+    background-position: 4px 4px;
+    background-repeat: no-repeat;
+
+}
+#worldBannerTitle{
+    position: fixed;
+    top: 10px; left: 52px;
+    height: 40px;
+    font-size: 18px;
+}
+
+/*  World - Pages  */
+
+#worldPages {
+    position: fixed;
+    top: 48px; left: 0px;
+    width: 500%; height: calc(100% - 96px);
+    -webkit-transition: 0.2s cubic-bezier(.29,.79,.53,.99);
+}
+
+#worldMap {
+    position: absolute;
+    top:0px; left: 0px;
+    width: 20%; height: 100%;
+    background: purple;
+
+
+}
+
+#worldOps {
+    position: absolute;
+    top:0px; left: 20%;
+    width: 20%; height: calc(100% - 96px);
+
+}
+
+#worldCell {
+    position: absolute;
+    top:0px; left: 40%;
+    width: 20%; height: calc(100% - 96px);
+
+}
+
+#worldIntels {
+    position: absolute;
+    top:0px; left: 60%;
+    width: 20%; height: calc(100% - 96px);
+
+}
+
+#worldChat {
+    position: absolute;
+    top:0px; left: 80%;
+    width: 20%; height: 100%;
+
+}
+
+#worldChatBox {
+    position: absolute;
+    color: #212323;
+
+    top: 0px; left: 2px;
+
+    width: calc(100% - 4px); height: calc(100% - 48px);
+
+}
+
+#worldChatInput {
+    position: absolute;
+    top: calc(100% - 48px); left: 2px;
+    width: calc(100% - 12px); height: 42px;
+
+}
+
+/*  World - Footer  */
+
+
+#worldFooter {
+    position: fixed;
+    bottom: 0px; left: 0px;
+    width: 100%; height: 48px;
+    padding: 0px;
+    background: #333;
+    box-shadow: inset 0 0 32px 4px rgba(21,22,23,0.45), 0 -2px 6px 2px rgba(21,22,23,0.6);
+}
+
+#worldFooterMap {
+    position: fixed;
+    left: 0px; bottom: 0px;
+    width: 20%; height: 48px;
+    background-image: url(assets/map.png);
+    background-size: 40px 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#worldFooterOps {
+    position: fixed;
+    left: 20%; bottom: 0px;
+    width: 20%; height: 48px;
+    background-image: url(assets/ops.png);
+    background-size: 40px 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+#worldFooterCell {
+    position: fixed;
+    left: 40%; bottom: 0px;
+    width: 20%; height: 48px;
+    background-image: url(assets/cell.png);
+    background-size: 40px 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+}
+
+#worldFooterIntels {
+    position: fixed;
+    left: 60%; bottom: 0px;
+    width: 20%; height: 48px;
+    background-image: url(assets/intels.png);
+    background-size: 40px 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+#worldFooterChat {
+    position: fixed;
+    left: 80%; bottom: 0px;
+    width: 20%; height: 48px;
+    background-image: url(assets/chats.png);
+    background-size: 40px 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+#worldFooterSelection {
+    position: fixed;
+    left: 0px; bottom: 0px;
+    width: 20%; height: 48px;
+    background: rgba(110,121,126,0.4);
+    -webkit-transition: 0.2s cubic-bezier(.29,.79,.53,.99);
+}
+
+
+
+
+
+
+
+#worldMenu {
+
+
+    background: #283033;
+    left: calc( -1px - 83.3%);
+    top: 0px; bottom: 0px;
+    overflow: hidden;
+    position: fixed;
+    padding: 0px;
+    width: 80%; height: 100%;
+    box-shadow: 3px 0 8px 1px rgba(21,22,23,0.5);
+    -webkit-transform-style: preserve-3d;
+
+    -webkit-transition: 0.25s cubic-bezier(.29,.79,.53,.99);
+   /*
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);*/
+
+
+    /* cubic-bezier(.29,.79,.53,.99);
+    /*
+    -webkit-transform-style: preserve3d;
+
+    -webkit-transform: translate3d(-104%,0,0);
+    */
+    display: flex;
+    flex-direction: column;
+    display: -webkit-box; /* iOS */
+    -webkit-box-orient: vertical; /* iOS */
+
+}
+#worldMenu.show {
+    -webkit-transform: translateX(104%);
+    transform: translateX(104%);
+    /*-webkit-transform: translate3d(104%,0,0);
+    transform: translate3d(104%,0,0);*/
+}
+#worldMenuDimmer {
+
+    position: fixed;
+    top: 0px; left: 0px;
+    width: 100%; height: 100%;
+    -webkit-transition: 0.25s cubic-bezier(.29,.79,.53,.99);
+    pointer-events: none;
+
+}
+#worldMenuDimmer.dim{
+    pointer-events: auto;
+    background: rgba(22,22,22,0.73);
+}
+
+/* Main menu items */
+#worldMenuTitle{
+/*
+    position: relative;
+    top: 0px; left: 0px;
+*/
+    margin: 0px; padding-left: 12px; padding-right: 12px;
+    width: calc(100% - 24px);
+    height: 56px;
+    font-size: 18px;
+    color: #d8dbdc;
+    background: #4a585e;
+    margin-bottom: 12px;
+}
+.worldMenuItem{
+/*
+    position: relative;
+    top: 0px; left: 0px;*/
+
+    margin: 0px; padding-left: 12px; padding-right: 12px;
+    padding-top: 4px; padding-bottom: 4px;
+    width: calc(100% - 24px);
+    height: 32px;
+    font-size: 18px;
+
+}
+
+
+
+
+
+
+/*  Menus
+    Z: 300
+*/
