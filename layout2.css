@@ -1,0 +1,38 @@
+
+
+#worldCellOff {
+    position: absolute;
+    top: 0px; left: 0px;
+    width: 100%; height: 100%;
+    background: #3c3f3e;
+}
+
+#worldCellOn {
+    display: none;
+    background: #3c3f3e;
+}
+#worldCellEmptyIcon {
+    position: absolute;
+    top: 8%; left: 0px;
+    width: 100%; height: 40%;
+    background-image: url(assets/mobile-ui-q.png);
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#worldCellEmptyMsg{
+    position: absolute;
+    top: 50%; left: 0px;
+    width: 100%;
+    text-align: center;
+}
+.emptyTitle {
+    color: #dfe5e3;
+    font-size: 24px;
+}
+
+.emptyTip {
+    color: #a1a9a7;
+    font-size: 16px;
+}

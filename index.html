@@ -23,11 +23,14 @@
 
 <!-- Load MVC Resources -->
 <link rel="stylesheet" type="text/css" href="layout.css">
+<link rel="stylesheet" type="text/css" href="layout2.css">
+<link rel="stylesheet" type="text/css" href="assets/leaflet.css">
 
 <!-- JavaScript Libraries -->
 
 <script type="text/javascript" src="include/hammer.min.js"></script>
 <script type="text/javascript" src="include/fastclick.js"></script>
+<script type="text/javascript" src="include/leaflet.js"></script>
 <script type="text/javascript" src="include/socket.io-1.2.1.js"></script>
 <script type="text/javascript" src="include/zepto.min.js"></script>
 <script type="text/javascript" src="include/velocity.min.js"></script>
@@ -44,48 +47,40 @@ onmousedown='return false;'>
 <!--  Notification Strip  -->
 <div id="notification">Notification</div>
 
-
-<!--  Login View  -->
-<div id="loginBg">
-    <div id="loginVer">Version 0.3 beta</div>
-    <div id="loginLogo">
-        <div id="loginCircle" onclick="notify('i','Error: Server is offline')"></div>
-        <div id="loginTitle" onclick="toggleLoginUI()">Assemble<br/><div id="loginChineseTitle">愛國者之槍</div></div>
-    </div>
-    <hr id="loginAlignr"/>
-    <div id="loginWhich">
-        <div id="loginBtn" onclick="showWorld()">Facebook 登入</div>
-
-        <div id="loginLoading" >
-        載入中<br/>
-            <div id="loginLoader">
-                <div id="loginLoaderBlock"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <!--  World View   -->
 
-<div id="worldWindow" class="hideAll">
+<div id="worldWindow" class="">
+
+    <!--  Pages  -->
+    <div id="worldPages">
+        <div id="worldMap"></div>
+        <div id="worldOps">Ops</div>
+        <div id="worldCell">
+            <div id="worldCellOff">
+                <div id="worldCellEmptyIcon"></div>
+                <div id="worldCellEmptyMsg">
+                    <p class="emptyTitle">沒有小隊</p>
+                    <p class="emptyTip">組織小隊來加強作戰效率</p>
+                </div>
+            </div>
+            <div id="worldCellOn">
+                <div></div>
+            </div>
+
+        </div>
+        <div id="worldIntels">Intels</div>
+        <div id="worldChat">
+            <div></div>
+            <div id="worldChatBox">
+
+            </div>
+            <input id="worldChatInput" type="text"/><div id="worldChatSend"></div>
+        </div>
+    </div>
     <!--  Banner Div  -->
     <div id="worldBanner">
         <div id="worldBannerButton" onclick="menuToggle()"></div>
-        <div id="worldBannerTitle">Assemble Beta</div>
-    </div>
-    <!--  Pages  -->
-    <div id="worldPages">
-        <div id="worldMap">Map</div>
-        <div id="worldOps">Ops</div>
-        <div id="worldCell">Cell</div>
-        <div id="worldIntels">Intels</div>
-        <div id="worldChat">Chat
-            <div></div>
-            <div id="worldChatBox"></div>
-            <input id="worldChatInput" type="text"/>
-        </div>
+        <div id="worldBannerTitle">地圖總覽</div>
     </div>
     <!--  Footer Div  -->
     <div id="worldFooter">
@@ -94,7 +89,7 @@ onmousedown='return false;'>
         <div id="worldFooterOps" onclick="pageToggle(1)"></div>
         <div id="worldFooterCell" onclick="pageToggle(2)"></div>
         <div id="worldFooterIntels" onclick="pageToggle(3)"></div>
-        <div id="worldFooterChat" onclick="pageToggle(4)"></div>
+        <div id="worldFooterChat" onclick="pageToggle(4); document.getElementById('worldChatInput').focus();"></div>
 
     </div>
 
@@ -109,8 +104,32 @@ onmousedown='return false;'>
             </div>
         </div>
 
-        <div class="worldMenuItem" onclick="navigator.app.exitApp()">離開程式</div>
+        <div class="worldMenuItem" onclick="tryQuit()">離開程式</div>
     </div>
+
+
+
+<!--  Login View  -->
+<div id="loginBg">
+    <div id="loginVer">Version 0.3 beta</div>
+    <div id="loginLogo">
+        <div id="loginCircle" onclick="notify('i','Error: Server is offline')"></div>
+        <div id="loginTitle" onclick="toggleLoginUI()">Assemble<br/><div id="loginChineseTitle">愛國者之槍</div></div>
+    </div>
+    
+    <div id="loginWhich">
+        <div id="loginBtn" onclick="showWorld()">Facebook 登入</div>
+
+        <div id="loginLoading" >
+            載入中<br/>
+            <div id="loginLoader">
+                <div id="loginLoaderBlock"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <!-- Not yet implemented
