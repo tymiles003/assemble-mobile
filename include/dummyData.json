@@ -1,0 +1,20 @@
+{
+    "intelId": 1,
+    "title": "Need backup at the Parliament!",
+    "lzId": 12,
+    "time": "Date object 2",
+    "content": "ditto",
+    "popularity": 234,
+    "replies": [
+        {
+            "replierId": 16,
+            "time": "Date object 2",
+            "content": "bleh."
+        },
+        {
+            "replierId": 13,
+            "time": "Date object 2",
+            "content": "meh."
+        }
+    ]
+}

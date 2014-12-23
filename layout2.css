@@ -8,31 +8,136 @@
 }
 
 #worldCellOn {
-    display: none;
+
     background: #3c3f3e;
 }
 #worldCellEmptyIcon {
     position: absolute;
     top: 8%; left: 0px;
-    width: 100%; height: 40%;
+    width: 100%; height: 36%;
     background-image: url(assets/mobile-ui-q.png);
-    background-size: 45%;
-    background-position: center;
+    background-size: 36%;
+    background-position: bottom;
     background-repeat: no-repeat;
 }
 
 #worldCellEmptyMsg{
     position: absolute;
-    top: 50%; left: 0px;
+    top: 40%; left: 0px;
     width: 100%;
     text-align: center;
 }
+
+
 .emptyTitle {
     color: #dfe5e3;
     font-size: 24px;
+    height: 26px;
 }
 
 .emptyTip {
     color: #a1a9a7;
     font-size: 16px;
+    height: 18px;
+}
+
+#worldCellInviteSwitch {
+    display: inline-block;
+    width: 44%; height: 28px;
+    background: #797f7d;
+    border-radius: 1px;
+    color: #283033;
+}
+
+
+#worldCellInviteButton {
+
+
+    display: inline-block;
+    width: 44%; height: 28px;
+    background: #797f7d;
+    border-radius: 1px;
+    color: #283033;
+
+}
+
+#worldCellCommander{
+    position: absolute;
+    top: 8px; left: 2%;
+    width: 96%; height: 72px;
+    background: #656a68;
+    border-radius: 1px;
+    box-shadow: 0 0 4px 1px rgba(21,22,23,0.32);
+}
+
+
+#worldCellSlotContainer {
+    position: absolute;
+    top: 80px; left: 3%;
+    height: calc(100% - 48px); width: 94%;
+
+    overflow-y: auto;
+}
+
+#worldCellSlotContainer::-webkit-scrollbar {
+    width: 3px; height: 0px;
+}
+
+.worldCellSlotEmpty {
+    position: relative;
+    top: 0px; left: 4px;
+    width: calc(100% - 8px); height: 72px;
+    border-radius: 1px;
+    margin-top: 10px;
+    background: #505453;
+    background-image: url(assets/plus.png);
+    background-position: center;
+    background-size: 48px 48px;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 4px 1px rgba(21,22,23,0.3);
+
+}
+
+.worldCellSlotMe {
+
+
+
+}
+
+.worldCellSlotOther {
+
+
+
+}
+
+.showPopOut {
+    -webkit-animation: showPopOut 0.3s;
+    animation: showPopOut 0.3s;
+}
+.hidePopOut {
+    -webkit-animation: hidePopOut 0.2s;
+    animation: hidePopOut 0.2s;
+}
+@-webkit-keyframes showPopOut {
+    0% {
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7); }
+    45% {
+        transform: scale(1.05);
+        -webkit-transform: scale(1.05); }
+    80% {
+        transform: scale(0.95);
+        -webkit-tranform: scale(0.95); }
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes hidePopOut {
+    0% {
+        transform: scale(1);
+        -webkit-transform: scale(1); }
+    100% {
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5); }
 }

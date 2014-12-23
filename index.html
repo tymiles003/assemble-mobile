@@ -25,12 +25,14 @@
 <link rel="stylesheet" type="text/css" href="layout.css">
 <link rel="stylesheet" type="text/css" href="layout2.css">
 <link rel="stylesheet" type="text/css" href="assets/leaflet.css">
+<link rel="stylesheet" type="text/css" href="assets/sweet-alert.css">
 
 <!-- JavaScript Libraries -->
 
 <script type="text/javascript" src="include/hammer.min.js"></script>
 <script type="text/javascript" src="include/fastclick.js"></script>
 <script type="text/javascript" src="include/leaflet.js"></script>
+<script type="text/javascript" src="include/sweet-alert.js"></script>
 <script type="text/javascript" src="include/socket.io-1.2.1.js"></script>
 <script type="text/javascript" src="include/zepto.min.js"></script>
 <script type="text/javascript" src="include/velocity.min.js"></script>
@@ -47,6 +49,13 @@ onmousedown='return false;'>
 <!--  Notification Strip  -->
 <div id="notification">Notification</div>
 
+
+<!--  Pop-up pseudo window  -->
+<div id="popupInput" onclick="popupInput()">
+
+</div>
+
+
 <!--  World View   -->
 
 <div id="worldWindow" class="">
@@ -57,14 +66,27 @@ onmousedown='return false;'>
         <div id="worldOps">Ops</div>
         <div id="worldCell">
             <div id="worldCellOff">
-                <div id="worldCellEmptyIcon"></div>
+                <div id="worldCellEmptyIcon" onclick="popupInput()"></div>
                 <div id="worldCellEmptyMsg">
                     <p class="emptyTitle">沒有小隊</p>
                     <p class="emptyTip">組織小隊來加強作戰效率</p>
+                    <div style="height:20px"></div>
+                    <div id="worldCellInviteSwitch">小隊邀請關閉</div>
+                    <div style="height:10px"></div>
+                    <div id="worldCellInviteButton" onclick="newCell()">新增小隊</div>
                 </div>
+
             </div>
-            <div id="worldCellOn">
+            <div id="worldCellOn" class="hideAll">
                 <div></div>
+                <div id="worldCellCommander"></div>
+                <div id="worldCellSlotContainer">
+                    <div id="worldCellSlot1" class="worldCellSlotEmpty" onclick="addUser()"></div>
+                    <div id="worldCellSlot2" class="worldCellSlotEmpty"></div>
+                    <div id="worldCellSlot3" class="worldCellSlotEmpty"></div>
+                    <div id="worldCellSlot4" class="worldCellSlotEmpty"></div>
+                    <div id="worldCellSlot5" class="worldCellSlotEmpty"></div>
+                </div>
             </div>
 
         </div>
@@ -116,7 +138,7 @@ onmousedown='return false;'>
         <div id="loginCircle" onclick="notify('i','Error: Server is offline')"></div>
         <div id="loginTitle" onclick="toggleLoginUI()">Assemble<br/><div id="loginChineseTitle">愛國者之槍</div></div>
     </div>
-    
+
     <div id="loginWhich">
         <div id="loginBtn" onclick="showWorld()">Facebook 登入</div>
 

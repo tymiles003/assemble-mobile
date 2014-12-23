@@ -25,7 +25,7 @@ hr {
   */
 #notification {
     position: fixed;
-    z-index: 2000;
+    z-index: 2100;
     height: 24px;
     width: 100%;
     bottom: -24px; left: 0px;
@@ -63,9 +63,10 @@ hr {
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: center;
-
-
+    /*
+    -webkit-transition-duration: 0.25s;   */
     display: table-cell;
+    opacity: 0.0;
 
     vertical-align: bottom;
 }
@@ -415,7 +416,7 @@ input[type="text"]:hover {
     -webkit-transform-style: preserve-3d;
 
     -webkit-transition: 0.25s cubic-bezier(.29,.79,.53,.99);
-    
+
     display: flex;
     flex-direction: column;
     display: -webkit-box; /* iOS */
@@ -444,13 +445,10 @@ input[type="text"]:hover {
 
 /* Main menu items */
 #worldMenuTitle{
-/*
-    position: relative;
-    top: 0px; left: 0px;
-*/
+
     margin: 0px; padding-left: 12px; padding-right: 12px;
     width: calc(100% - 24px);
-    height: 56px;
+    height: 72px;
     font-size: 18px;
     color: #d8dbdc;
     background: #4a585e;

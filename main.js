@@ -1,7 +1,7 @@
 /*
     ASSEMBLE Main Window Operator Module
 
-    v0.0.2
+    v0.2.1
     r.w. 2014
 
     Usage is subject to local regulations.
@@ -20,6 +20,10 @@ var summaryToggled = 0;
 var ifJoinedOp = 0;
 var intelToggled = 0;
 var newIntelToggled = 0;
+
+// Added over 0.2
+var alertToggled = false;
+
 
 var deviceModel, deviceOS;
 
@@ -92,6 +96,56 @@ socket.on('connect', function() {
 
 
 
+/*  API start  */
+
+
+/*  API end   */
+
+// Cell operations
+function newCell(){
+    // check available slot, request
+    alertToggled = true;
+    swal({
+        title: "建立小隊代號",
+        text: "選一個大寫英文字母，然後加上兩位數字作為代號\ne.g. B13",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "輸入代號",
+        cancelButtonText: "取消",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+    function(isConfirm){
+        if (isConfirm) {
+            //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            var desiredCellId = prompt('請輸入英文以及數字代號');
+            if (desiredCellId) {
+                notify("i","小隊" + desiredCellId + "建立成功");
+                swal("建立成功", "小隊" + desiredCellId, "success");
+                alertToggled = false;
+
+            } else {
+
+            }
+
+        } else {
+            //swal("Cancelled", "Your imaginary file is safe :)", "info");
+            alertToggled = false;
+        }
+    });
+    // pick a slot, emit and callback
+}
+function addUser(){
+    // bounce the request to the target userId
+    var q = prompt("請輸入對方使用者編號(ID)");
+    // use callback to determine response
+
+}
+
+
+
+
 
 
 
@@ -127,7 +181,20 @@ $(window).on('load',function(){
         maxZoom: 18
     }).addTo(map);
 
+    // Handling UI long press
+    var pressTimer;
 
+    $("#worldFooterMap").mouseup(function(){
+        clearTimeout(pressTimer);
+        // Clear timeout
+        return false;
+    }).mousedown(function(){
+        // Set timeout
+        pressTimer = window.setTimeout(function() {
+            notify("i", "Long press detected.");
+        },1000)
+        return false;
+    });
 
 
 
@@ -138,25 +205,8 @@ $(window).on('load',function(){
 
 // Process device status
 function onDeviceReady(){
-    //var deviceInfo = document.getElementById('deviceInfo');
-    //deviceInfo.innerHTML = 'Device Model: '    + device.model    + '<br />' +
-    //                'Device Cordova: '  + device.cordova  + '<br />' +
-    //                'Device Platform: ' + device.platform + '<br />' +
-    //               'Device UUID: '     + device.uuid     + '<br />' +
-    //               'Device Version: '  + device.version  + '<br />';
     deviceModel = device.model;
     deviceOS = device.version;
-    alert("device ready.");
-
-
-
-
-    //alert("This is a " + deviceModel + ", running " + deviceOS);
-
-    //socket.emit('debug','Hello from ' + deviceModel + ', Android v' + deviceOS);
-
-
-
 }
 
 
@@ -175,8 +225,14 @@ function tryQuit(){
 // Process back button behavior
 
 function backHandler(){
+    // see if alert is open or not
+    if (alertToggled) {
+        closeswal();
+        alertToggled = false;
+        return false;
+    }
     // determine if it's at level 0
-    if (toggledPage == 0) {
+    if (toggledPage == 0 && (menuToggled == false)) {
         tryQuit();
         return false;
     }
@@ -211,6 +267,7 @@ function toggleLoginUI(){
             //
             $("#loginLoading").addClass("hideAll");
             $("#loginBtn").addClass("show");
+
             toggledLogin = false;
         }, 605);
     } else {
@@ -221,6 +278,8 @@ function toggleLoginUI(){
             toggledLogin = true;
         }, 300);
         setTimeout(function(){
+            $("#loginCircle").css("opacity", "1.0");
+            $("#loginCircle").addClass("showPopOut");
             $("#loginBtn").addClass("hideAll");
             $("#loginLoading").addClass("show");
             toggledLogin = true;
@@ -264,49 +323,33 @@ function notify(type,msg){
     }
 }
 
+// Pseudo window input function
+var popupToggled = false;
+function popupInput(arg){
+    if (popupToggled) {
+        $("#popupInput").css("-webkit-transform","translate3d(0,0,0)")
+        $("#worldInput").css("pointer-events", "none");
+        $("#worldMenuDimmer").css("background", "rgba(0,0,0,0)");
+        $("#worldMenuDimmer").css("pointer-events", "none");
+        popupToggled = false;
+    } else {
+        $("#popupInput").css("-webkit-transform","translate3d(0,-100%,0)")
+        $("#worldInput").css("pointer-events", "auto");
+        $("#worldMenuDimmer").css("background", "rgba(22,22,22,0.73)");
+        $("#worldMenuDimmer").css("pointer-events", "auto");
+        popupToggled = true;
+    }
+
+}
+
+
 // Login Animations
 function showWorld(){
     $("#loginBg").css("opacity","0.0");
     setTimeout(function(){
         $("#loginBg").remove();
-
-        // INIT: Bind map object to GMaps
-        /*
-        map = new GMaps({
-            div: "#worldMap",
-            lat: 25.044045,
-            lng: 121.519902,
-            zoom: 17,
-            zoomControl: true,
-
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL
-            },
-            disableDoubleClickZoom: true,
-            mapTypeControl: false,
-            scaleControl: true,
-            scrollwheel: true,
-            panControl: false,
-            streetViewControl: false,
-            draggable : true,
-            overviewMapControl: false,
-            overviewMapControlOptions: {
-                opened: false,
-            },
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-        // INIT: Map styling
-        map.addStyle({
-            styledMapName:"Ground Zeroes",
-            styles: mapOptions,
-            mapTypeId: "map_gz"  });
-
-            map.setStyle("map_gz");
-            alert("map loaded"); */
-
-
+        swal("Welcome", "Login success", "success");
     }, 350);
-
 }
 
 // Process pages
@@ -361,6 +404,10 @@ function menuToggle(){
         menuToggled = true;
     }
 }
+
+
+
+
 
 // Process DOM nodes
 
