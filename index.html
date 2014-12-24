@@ -37,6 +37,8 @@
 <script type="text/javascript" src="include/zepto.min.js"></script>
 <script type="text/javascript" src="include/velocity.min.js"></script>
 
+<!--  Cordova-specific entry point  -->
+<script type="text/javascript" src="cordova.js"></script>
 
 
 
@@ -63,7 +65,13 @@ onmousedown='return false;'>
     <!--  Pages  -->
     <div id="worldPages">
         <div id="worldMap"></div>
-        <div id="worldOps">Ops</div>
+        <div id="worldOps">
+            <div id="worldOpsEmpty"></div>
+            <div id="worldOpsList"></div>
+            <div id="worldOpsObjectList">
+                <div class=""></div>
+            </div>
+        </div>
         <div id="worldCell">
             <div id="worldCellOff">
                 <div id="worldCellEmptyIcon" onclick="popupInput()"></div>
@@ -175,7 +183,7 @@ onmousedown='return false;'>
 </div>
 
 
-<script type="text/javascript" src="cordova.js"></script>
+
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="world.js"></script>
 

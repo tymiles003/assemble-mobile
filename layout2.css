@@ -194,3 +194,15 @@
     outline: 0px solid #838383;
 
 }
+
+
+/*  Player arrow icon  */
+.playerArrowIcon {
+    width: 48px; height: 48px;
+    background-image: url(assets/playerIcon.png);
+    background-size: 48px 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    transform: rotate(0deg);
+}

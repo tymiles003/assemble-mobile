@@ -147,13 +147,53 @@ function addUser(){
 }
 
 // process map behavior
-function onLocated(event){
-    map.panTo(event.latlng, {animate: true, easeLinearity: 0.1});
-}
-function onLocateError(event){
-    swal("定位失敗", event.message, "warning");
+var locationWatcher;
+var locationTimer;
+var compassWatcher;
+var playerObject;
+
+function stopLocate(){
+    notify("w","已經停止定位功能");
+    map.stopLocate();
 }
 
+function onLocated(event){
+    //notify("i","使用者定位成功");
+    map.panTo(event.latlng, {animate: true, easeLinearity: 0.1});
+    playerObject.setLatLng(event.latlng);
+
+}
+function onLocateError(event){
+    swal("定位失敗", "請記得打開定位功能，並且重新開啟本程式\n"+ event.message, "error");
+}
+
+// compass
+function startCompass(){
+    console.log(" [DEVICE] Starting compass service");
+    compassWatcher = navigator.compass.watchHeading(onCompassOK, onCompassError, {frequency: 900});
+}
+
+function onCompassOK(heading){
+    // get current heading, and then rotate the div on map
+    // margin: 22deg
+    var rotation = heading.trueHeading;
+    if (rotation <= 338) {
+        rotation += 22;
+    } else {
+        rotation -= 338;
+    }
+    var transformString = playerObject._icon.style.webkitTransform;
+    var offset = transformString.split("rotate");
+    playerObject._icon.style.webkitTransform = offset[0] + " rotate("+rotation+"deg)";
+
+}
+function onCompassError(err){
+    notify("e","羅盤錯誤：" + err.code);
+}
+function stopCompass(){
+    console.log(" [DEVICE] Stopping compass service");
+    navigator.compass.clearWatch(compassWatcher);
+}
 
 
 
@@ -197,8 +237,14 @@ $(window).on('load',function(){
         maxZoom: 18
     }).addTo(map);
     L.control.zoom({position: 'bottomleft'}).addTo(map);
+
+    // create player icon
+    var playerIcon = L.divIcon({className: 'playerArrowIcon',iconSize:[48,48], iconAnchor: [24,26]});
+    playerObject = L.marker([25.044045,121.519902], {icon: playerIcon}).addTo(map);
+
     // location watcher
-    var locationWatcher = map.locate({watch: true, setView: false, maxZoom: 16, enableHighAccuracy: true});
+    locationWatcher = map.locate({watch: true, setView: false, maxZoom: 17, enableHighAccuracy: true, maximumAge: 180000, timeout: 15000});
+
     map.on('locationfound', onLocated);
     map.on('locationerror', onLocateError);
 
@@ -222,7 +268,7 @@ $(window).on('load',function(){
 
 
     toggleLoginUI()
-
+    swal("開啟程式定位", "本程式會使用GPS，請記得在系統設定開啟定位功能", "warning");
 
 });
 
@@ -230,6 +276,16 @@ $(window).on('load',function(){
 function onDeviceReady(){
     deviceModel = device.model;
     deviceOS = device.version;
+    console.log("\n ASSEMBLE Client\n v0.2.9");
+    console.log(" r.w. 2014\n");
+    console.log(" [DEVICE] Device online");
+    console.log("          " + deviceModel + " with Google Android "+ deviceOS+"\n          UUID: " + device.uuid + "\n          Cordova v"+device.cordova);
+
+    // process compass
+    if (navigator.compass) {
+        console.log(" [DEVICE] Compass online\n");
+        startCompass();
+    }
 }
 
 
