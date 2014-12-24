@@ -152,8 +152,25 @@ var locationTimer;
 var compassWatcher;
 var playerObject;
 
+var toggleTraced = false;
+function toggleTrace(){
+    // duh.
+    if (toggleTraced) {
+        notify("w","已經停止定位功能");
+        stopLocate();
+    } else {
+        notify("i","啟動定位功能中");
+        startLocate();
+    }
+
+}
+
+function startLocate(){
+    locationWatcher = map.locate({watch: true, setView: false, maxZoom: 17, enableHighAccuracy: true, maximumAge: 180000, timeout: 15000});
+}
+
 function stopLocate(){
-    notify("w","已經停止定位功能");
+
     map.stopLocate();
 }
 
@@ -176,12 +193,15 @@ function startCompass(){
 function onCompassOK(heading){
     // get current heading, and then rotate the div on map
     // margin: 22deg
+
     var rotation = heading.trueHeading;
+
+    /*
     if (rotation <= 338) {
         rotation += 22;
     } else {
         rotation -= 338;
-    }
+    }*/
     var transformString = playerObject._icon.style.webkitTransform;
     var offset = transformString.split("rotate");
     playerObject._icon.style.webkitTransform = offset[0] + " rotate("+rotation+"deg)";
@@ -531,6 +551,18 @@ function popupCheckToggle(number){
     } else {
         $("#popupCheck"+number).addClass("checked");
         popupCheckToggled = true;
+    }
+}
+
+// Process worldMenu checks
+var worldMenuCheckToggled = false;
+function worldMenuCheckToggle(number){
+    if (worldMenuCheckToggled) {
+        $("#worldMenuCheck"+number).removeClass("checked");
+        worldMenuCheckToggled = false;
+    } else {
+        $("#worldMenuCheck"+number).addClass("checked");
+        worldMenuCheckToggled = true;
     }
 }
 

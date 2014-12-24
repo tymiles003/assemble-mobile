@@ -66,16 +66,26 @@ onmousedown='return false;'>
     <div id="worldPages">
         <div id="worldMap"></div>
         <div id="worldOps">
-            <div id="worldOpsEmpty"></div>
+            <div id="worldOpsEmpty">
+                <div class="worldCellEmptyIcon" onclick="popupInput()"></div>
+                <div class="worldCellEmptyMsg">
+                    <p class="emptyTitle">無資料</p>
+                    <p class="emptyTip">目前沒有進行中的作戰</p>
+                    <div style="height:20px"></div>
+
+                    <div style="height:10px"></div>
+
+                </div>
+            </div>
             <div id="worldOpsList"></div>
             <div id="worldOpsObjectList">
                 <div class=""></div>
             </div>
         </div>
         <div id="worldCell">
-            <div id="worldCellOff">
-                <div id="worldCellEmptyIcon" onclick="popupInput()"></div>
-                <div id="worldCellEmptyMsg">
+            <div id="worldCellOff" >
+                <div class="worldCellEmptyIcon" onclick="popupInput()"></div>
+                <div class="worldCellEmptyMsg">
                     <p class="emptyTitle">沒有小隊</p>
                     <p class="emptyTip">組織小隊來加強作戰效率</p>
                     <div style="height:20px"></div>
@@ -98,7 +108,23 @@ onmousedown='return false;'>
             </div>
 
         </div>
-        <div id="worldIntels">Intels</div>
+        <div id="worldIntels">
+            <div id="worldIntelsEmpty">
+                <div class="worldCellEmptyIcon" onclick="popupInput()"></div>
+                <div class="worldCellEmptyMsg">
+                    <p class="emptyTitle">沒有情報</p>
+                    <p class="emptyTip">情報伺服器離線或是沒有資料</p>
+                    <div style="height:20px"></div>
+
+                    <div style="height:10px"></div>
+
+                </div>
+            </div>
+            <div id="worldOpsList"></div>
+            <div id="worldOpsObjectList">
+                <div class=""></div>
+            </div>
+        </div>
         <div id="worldChat">
             <div></div>
             <div id="worldChatBox">
@@ -125,6 +151,7 @@ onmousedown='return false;'>
     </div>
 
 </div>
+    <!--  Menu (Left)  -->
     <div id="worldMenuDimmer" onclick="menuToggle()"></div>
     <div id="worldMenu" onclick="menuToggle()">
         <div id="worldMenuTitle">
@@ -134,8 +161,20 @@ onmousedown='return false;'>
                 <div id="worldMenuPlayerDetail"> </div>
             </div>
         </div>
+        <div class="worldMenuItem" onclick="worldMenuCheckToggle(1);toggleTrace()">
+            顯示我的位置
+            <div id="worldMenuCheck1" class="popupInfoCheckBox"></div>
+        </div>
+        <div class="worldMenuItem" onclick="worldMenuCheckToggle(2);">
 
+            <div id="worldMenuCheck2" class="popupInfoCheckBox"></div>
+        </div>
+        <div class="worldMenuItem" onclick="worldMenuCheckToggle(3);">
+            
+            <div id="worldMenuCheck3" class="popupInfoCheckBox"></div>
+        </div>
         <div class="worldMenuItem" onclick="tryQuit()">離開程式</div>
+
     </div>
 
 
@@ -163,11 +202,11 @@ onmousedown='return false;'>
 <!--  Pop-up info window  -->
 <div id="popupInfo">
     <div id="popupInfoMap" class="hideAll">
-        <div class="popupInfoItem"  onclick="popupCheckToggle(1)">
+        <div class="popupInfoItem"  onclick="popupCheckToggle(1);toggleTrace()">
             <div class="popupInfoItemText">顯示我的位置</div>
             <div id="popupCheck1" class="popupInfoCheckBox"></div>
         </div>
-        <div class="popupInfoItem">
+        <div class="popupInfoItem hideAll">
             <div class="popupInfoItemText">作戰目標一覽</div>
 
         </div>
