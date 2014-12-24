@@ -103,6 +103,7 @@ onmousedown='return false;'>
     <div id="worldBanner">
         <div id="worldBannerButton" onclick="menuToggle()"></div>
         <div id="worldBannerTitle">地圖總覽</div>
+        <div id="worldBannerDropdownButton" onclick="dropdownToggle()"></div>
     </div>
     <!--  Footer Div  -->
     <div id="worldFooter">
@@ -151,9 +152,33 @@ onmousedown='return false;'>
     </div>
 </div>
 
+<!--  Pop-up info window  -->
+<div id="popupInfo">
+    <div id="popupInfoMap" class="hideAll">
+        <div class="popupInfoItem"  onclick="popupCheckToggle(1)">
+            <div class="popupInfoItemText">顯示我的位置</div>
+            <div id="popupCheck1" class="popupInfoCheckBox"></div>
+        </div>
+        <div class="popupInfoItem">
+            <div class="popupInfoItemText">作戰目標一覽</div>
+
+        </div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="popupInfoOps" class="hideAll"></div>
+    <div id="popupInfoCell" class="hideAll"></div>
+    <div id="popupInfoIntel" class="hideAll"></div>
+    <div id="popupInfoChat" class="hideAll"></div>
+</div>
+
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="world.js"></script>
+
 <!-- Not yet implemented
 <script type="text/javascript" src="socket.js"></script> -->
 </body>

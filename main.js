@@ -23,6 +23,9 @@ var newIntelToggled = 0;
 
 // Added over 0.2
 var alertToggled = false;
+var options = {
+    mapLocate: true
+};
 
 
 var deviceModel, deviceOS;
@@ -143,12 +146,19 @@ function addUser(){
 
 }
 
+// process map behavior
+function onLocated(event){
+    map.panTo(event.latlng, {animate: true, easeLinearity: 0.1});
+}
+function onLocateError(event){
+    swal("定位失敗", event.message, "warning");
+}
 
 
 
 
 
-
+// on window load
 
 $(window).on('load',function(){
     if ($("#loginWhich").hasClass("show")) {
@@ -174,12 +184,25 @@ $(window).on('load',function(){
     $("#worldMap").css("width", j+"px");
 
 
-    // OSM
-    map = L.map('worldMap').setView([25.044045,121.519902], 17);
+    // openstreetmap initialisation
+    var mapOptions = {
+        center: [25.044045,121.519902],
+        zoom: 17,
+        attributionControl: false,
+        zoomControl: false
+    };
+    map = L.map('worldMap', mapOptions); //.setView([25.044045,121.519902], 17);
     L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: 'with &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18
     }).addTo(map);
+    L.control.zoom({position: 'bottomleft'}).addTo(map);
+    // location watcher
+    var locationWatcher = map.locate({watch: true, setView: false, maxZoom: 16, enableHighAccuracy: true});
+    map.on('locationfound', onLocated);
+    map.on('locationerror', onLocateError);
+
+
 
     // Handling UI long press
     var pressTimer;
@@ -229,6 +252,11 @@ function backHandler(){
     if (alertToggled) {
         closeswal();
         alertToggled = false;
+        return false;
+    }
+    // Close the drop-down if opened
+    if (dropdownToggled) {
+        dropdownToggle();
         return false;
     }
     // determine if it's at level 0
@@ -348,7 +376,7 @@ function showWorld(){
     $("#loginBg").css("opacity","0.0");
     setTimeout(function(){
         $("#loginBg").remove();
-        swal("Welcome", "Login success", "success");
+        swal("Welcome", "Login success", "warning");
     }, 350);
 }
 
@@ -362,6 +390,11 @@ function pageToggle(arg){
     $("#worldFooterSelection").css("-webkit-transform", "translate3d(" + (arg * i) + "px, 0,0)");
     // Move the page
     $("#worldPages").css("-webkit-transform", "translate3d(-" + (arg * window.innerWidth) + "px, 0,0)");
+    // Close the drop-down if opened
+    if (dropdownToggled) {
+        dropdownToggle();
+    }
+
     // Change the title
     switch (arg) {
         case 0:
@@ -385,11 +418,68 @@ function pageToggle(arg){
             toggledPage = 4;
             break;
     }
+
+}
+
+// Process drop-down menu
+var dropdownToggled = false;
+function dropdownToggle(){
+
+    if (dropdownToggled) {
+        $("#worldBannerDropdownButton").removeClass("spin");
+        $("#popupInfo").removeClass("show");
+
+        setTimeout(function(){
+            $("#popupInfoMap").addClass("hideAll");
+            $("#popupInfoOps").addClass("hideAll");
+            $("#popupInfoCell").addClass("hideAll");
+            $("#popupInfoIntel").addClass("hideAll");
+            $("#popupInfoChat").addClass("hideAll");
+            $("#popupInfo").addClass("hideAll");
+        },200);
+        dropdownToggled = false;
+    } else {
+        $("#worldBannerDropdownButton").addClass("spin");
+        // determine which page's menu is used
+        switch (toggledPage){
+            case 0:
+                $("#popupInfoMap").removeClass("hideAll");
+                break;
+            case 1:
+                $("#popupInfoOps").removeClass("hideAll");
+                break;
+            case 2:
+                $("#popupInfoCell").removeClass("hideAll");
+                break;
+            case 3:
+                $("#popupInfoIntel").removeClass("hideAll");
+                break;
+            case 4:
+                $("#popupInfoChat").removeClass("hideAll");
+                break;
+        };
+        $("#popupInfo").removeClass("hideAll");
+
+        $("#popupInfo").addClass("show");
+        dropdownToggled = true;
+    }
+
+}
+
+// Process drop-down checks
+var popupCheckToggled = false;
+function popupCheckToggle(number){
+    if (popupCheckToggled) {
+        $("#popupCheck"+number).removeClass("checked");
+        popupCheckToggled = false;
+    } else {
+        $("#popupCheck"+number).addClass("checked");
+        popupCheckToggled = true;
+    }
 }
 
 
-
-// Process menu
+// Process left menu
 var menuToggled = false;
 function menuToggle(){
     if (menuToggled){

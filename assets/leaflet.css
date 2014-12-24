@@ -390,11 +390,13 @@
 .leaflet-popup-content-wrapper {
 	padding: 1px;
 	text-align: left;
-	border-radius: 12px;
+	border-radius: 2px;
+	color: #333;
 	}
 .leaflet-popup-content {
 	margin: 13px 19px;
 	line-height: 1.4;
+	font-size: 14px;
 	}
 .leaflet-popup-content p {
 	margin: 18px 0;

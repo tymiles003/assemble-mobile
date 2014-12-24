@@ -221,6 +221,22 @@ hr {
     font-size: 18px;
 }
 
+#worldBannerDropdownButton {
+    position: fixed;
+    top: 4px; right: 10px;
+
+    width: 36px; height: 36px;
+    background-image: url(assets/dropdown.png);
+    background-size: 30px 30px;
+    background-position: 4px 4px;
+    background-repeat: no-repeat;
+    -webkit-transition: 0.2s ease;
+
+}
+#worldBannerDropdownButton.spin {
+    -webkit-transform: rotate(180deg);
+}
+
 /*  World - Pages  */
 
 #worldPages {
